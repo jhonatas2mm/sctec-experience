@@ -161,7 +161,6 @@ function Hero({ onQuiz }: { onQuiz: () => void }) {
         >
           <source src={assetUrl('sctec-hero.optimized.mp4')} type="video/mp4" />
         </video>
-        <div className="hero-focus-blur" aria-hidden="true" />
         <div className="hero-overlay" />
         <div className="hero-grid" />
       </motion.div>
@@ -468,39 +467,39 @@ function FinalCta({ onQuiz }: { onQuiz: () => void }) {
       label: 'Começar do zero',
       profile: 'Estudantes',
       className: 'audience-one',
-      convergeX: 90,
-      convergeY: 45,
+      convergeX: 36,
+      convergeY: 8,
     },
     {
       image: assetUrl('publico-transicao.webp'),
       label: 'Mudar de carreira',
       profile: 'Transição profissional',
       className: 'audience-two',
-      convergeX: -90,
-      convergeY: 45,
+      convergeX: -36,
+      convergeY: 8,
     },
     {
       image: assetUrl('publico-empreendedor.webp'),
       label: 'Fazer o negócio crescer',
       profile: 'Empreendedores',
       className: 'audience-three',
-      convergeX: 95,
-      convergeY: -45,
+      convergeX: 38,
+      convergeY: -8,
     },
     {
       image: assetUrl('publico-dev.webp'),
       label: 'Evoluir com IA',
       profile: 'Desenvolvedores',
       className: 'audience-four',
-      convergeX: -95,
-      convergeY: -45,
+      convergeX: -38,
+      convergeY: -8,
     },
     {
       image: assetUrl('publico-recolocacao.webp'),
       label: 'Recomeçar',
       profile: 'Recolocação profissional',
       className: 'audience-five',
-      convergeX: 115,
+      convergeX: 42,
       convergeY: 0,
     },
     {
@@ -508,7 +507,7 @@ function FinalCta({ onQuiz }: { onQuiz: () => void }) {
       label: 'Trabalhar melhor',
       profile: 'Profissionais de todas as áreas',
       className: 'audience-six',
-      convergeX: -115,
+      convergeX: -42,
       convergeY: 0,
     },
   ]
