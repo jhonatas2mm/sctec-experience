@@ -766,6 +766,10 @@ a:focus-visible {
   letter-spacing: -0.07em;
 }
 
+.stat-value-static {
+  display: none;
+}
+
 .stat > span {
   max-width: 180px;
   color: #58615b;
@@ -2067,6 +2071,30 @@ footer {
   :root {
     --page-pad: 20px;
     --radius: 17px;
+  }
+
+  .scroll-reveal,
+  .track-card,
+  .audience-card,
+  .stat-featured-label,
+  .hero-media,
+  .hero-content {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .stat-highlight {
+    clip-path: circle(150% at 50% 50%) !important;
+  }
+
+  .stat-value-animated {
+    display: none;
+  }
+
+  .stat-value-static {
+    display: inline;
   }
 
   .government-bar span {

@@ -137,7 +137,7 @@ function Reveal({
 
   return (
     <motion.div
-      className={className}
+      className={`scroll-reveal ${className}`.trim()}
       ref={revealRef}
       style={{ opacity, y, scale }}
     >
@@ -317,8 +317,15 @@ function AnimatedStatValue({ value }: { value: string }) {
 
   return (
     <strong aria-label={value} ref={valueRef}>
-      <span aria-hidden="true" ref={displayRef}>
+      <span
+        aria-hidden="true"
+        className="stat-value-animated"
+        ref={displayRef}
+      >
         {match ? `0${suffix}` : value}
+      </span>
+      <span aria-hidden="true" className="stat-value-static">
+        {value}
       </span>
     </strong>
   )
