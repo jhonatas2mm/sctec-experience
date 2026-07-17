@@ -801,6 +801,59 @@ a:focus-visible {
   line-height: 1.45;
 }
 
+.stat-featured {
+  position: relative;
+  isolation: isolate;
+  padding-right: 34px;
+  padding-bottom: 18px;
+  border-right-color: transparent;
+}
+
+.stat-featured > strong,
+.stat-featured > span {
+  position: relative;
+  z-index: 1;
+  color: #071008;
+}
+
+.stat-highlight {
+  position: absolute;
+  z-index: 0;
+  inset: 8px 10px -10px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 48%),
+    var(--lime);
+  box-shadow:
+    0 18px 42px rgba(0, 236, 98, 0.24),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+  transform-origin: left center;
+}
+
+.stat .stat-featured-label {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  max-width: none;
+  color: #071008;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.stat-featured-label > span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #071008;
+  box-shadow: 0 0 0 4px rgba(7, 16, 8, 0.1);
+}
+
 .tracks-section {
   overflow: hidden;
   background:
@@ -2185,6 +2238,22 @@ footer {
     min-height: 145px;
     padding: 20px 12px 15px 0;
     border-bottom: 1px solid #cbd0cc;
+  }
+
+  .stat-featured {
+    padding-right: 16px;
+    padding-left: 18px;
+  }
+
+  .stat-highlight {
+    inset: 6px 4px -6px 6px;
+    border-radius: 14px;
+  }
+
+  .stat .stat-featured-label {
+    top: 16px;
+    right: 12px;
+    font-size: 8px;
   }
 
   .stat:nth-child(2) {

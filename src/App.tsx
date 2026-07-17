@@ -285,7 +285,33 @@ function ProgramSection() {
           ['14+', 'anos para começar a participar'],
           ['SC', 'oportunidades para todo o estado'],
         ].map(([value, label], index) => (
-          <Reveal className="stat" delay={index * 0.07} key={value}>
+          <Reveal
+            className={`stat ${value === '100%' ? 'stat-featured' : ''}`}
+            delay={index * 0.07}
+            key={value}
+          >
+            {value === '100%' && (
+              <>
+                <motion.div
+                  aria-hidden="true"
+                  className="stat-highlight"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true, amount: 0.65 }}
+                  transition={{ duration: 0.9, delay: 0.2, ease }}
+                />
+                <motion.span
+                  className="stat-featured-label"
+                  initial={{ opacity: 0, x: -12 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.65 }}
+                  transition={{ duration: 0.45, delay: 0.72, ease }}
+                >
+                  <span aria-hidden="true" />
+                  Sem custo
+                </motion.span>
+              </>
+            )}
             <strong>{value}</strong>
             <span>{label}</span>
           </Reveal>
