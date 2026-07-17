@@ -295,10 +295,10 @@ function ProgramSection() {
                 <motion.div
                   aria-hidden="true"
                   className="stat-highlight"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
+                  initial={{ clipPath: 'circle(0% at 50% 50%)' }}
+                  whileInView={{ clipPath: 'circle(150% at 50% 50%)' }}
                   viewport={{ once: true, amount: 0.65 }}
-                  transition={{ duration: 0.9, delay: 0.2, ease }}
+                  transition={{ duration: 1.05, delay: 0.18, ease }}
                 />
                 <motion.span
                   className="stat-featured-label"
