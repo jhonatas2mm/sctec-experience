@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   AnimatePresence,
   motion,
+  useMotionValueEvent,
   useScroll,
   useTransform,
   type MotionValue,
@@ -123,13 +124,27 @@ function Reveal({
   className?: string
   delay?: number
 }) {
+  const revealRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: revealRef,
+    offset: ['start 94%', 'start 62%'],
+  })
+  const start = Math.min(delay * 0.55, 0.22)
+  const end = Math.min(0.78 + delay * 0.3, 1)
+  const opacity = useTransform(scrollYProgress, [start, end], [0, 1])
+  const y = useTransform(scrollYProgress, [start, end], [54, 0])
+  const scale = useTransform(scrollYProgress, [start, end], [0.975, 1])
+  const filter = useTransform(
+    scrollYProgress,
+    [start, end],
+    ['blur(9px)', 'blur(0px)'],
+  )
+
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 36 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-8%' }}
-      transition={{ duration: 0.85, delay, ease }}
+      ref={revealRef}
+      style={{ opacity, y, scale, filter }}
     >
       {children}
     </motion.div>
@@ -276,6 +291,35 @@ function StatHighlight() {
   )
 }
 
+function AnimatedStatValue({ value }: { value: string }) {
+  const valueRef = useRef<HTMLElement>(null)
+  const match = value.match(/^(\d+)(.*)$/)
+  const target = Number(match?.[1] ?? 0)
+  const suffix = match?.[2] ?? ''
+  const [displayValue, setDisplayValue] = useState(
+    match ? `0${suffix}` : value,
+  )
+  const { scrollYProgress } = useScroll({
+    target: valueRef,
+    offset: ['start 90%', 'start 58%'],
+  })
+  const animatedValue = useTransform(scrollYProgress, [0, 1], [0, target])
+
+  useMotionValueEvent(animatedValue, 'change', (latest) => {
+    if (!match) return
+    const nextValue = `${Math.round(latest)}${suffix}`
+    setDisplayValue((current) =>
+      current === nextValue ? current : nextValue,
+    )
+  })
+
+  return (
+    <strong aria-label={value} ref={valueRef}>
+      <span aria-hidden="true">{displayValue}</span>
+    </strong>
+  )
+}
+
 function ProgramSection() {
   return (
     <section className="section program-section" id="programa">
@@ -327,7 +371,7 @@ function ProgramSection() {
                 </motion.span>
               </>
             )}
-            <strong>{value}</strong>
+            <AnimatedStatValue value={value} />
             <span>{label}</span>
           </Reveal>
         ))}
