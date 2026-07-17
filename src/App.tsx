@@ -254,6 +254,28 @@ function Hero({ onQuiz }: { onQuiz: () => void }) {
   )
 }
 
+function StatHighlight() {
+  const highlightRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: highlightRef,
+    offset: ['start 88%', 'start 56%'],
+  })
+  const clipPath = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ['circle(0% at 50% 50%)', 'circle(150% at 50% 50%)'],
+  )
+
+  return (
+    <motion.div
+      aria-hidden="true"
+      className="stat-highlight"
+      ref={highlightRef}
+      style={{ clipPath }}
+    />
+  )
+}
+
 function ProgramSection() {
   return (
     <section className="section program-section" id="programa">
@@ -292,14 +314,7 @@ function ProgramSection() {
           >
             {value === '100%' && (
               <>
-                <motion.div
-                  aria-hidden="true"
-                  className="stat-highlight"
-                  initial={{ clipPath: 'circle(0% at 50% 50%)' }}
-                  whileInView={{ clipPath: 'circle(150% at 50% 50%)' }}
-                  viewport={{ once: true, amount: 0.65 }}
-                  transition={{ duration: 1.05, delay: 0.18, ease }}
-                />
+                <StatHighlight />
                 <motion.span
                   className="stat-featured-label"
                   initial={{ opacity: 0, x: -12 }}
