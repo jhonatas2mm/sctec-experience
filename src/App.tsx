@@ -134,17 +134,12 @@ function Reveal({
   const opacity = useTransform(scrollYProgress, [start, end], [0, 1])
   const y = useTransform(scrollYProgress, [start, end], [54, 0])
   const scale = useTransform(scrollYProgress, [start, end], [0.975, 1])
-  const filter = useTransform(
-    scrollYProgress,
-    [start, end],
-    ['blur(9px)', 'blur(0px)'],
-  )
 
   return (
     <motion.div
       className={className}
       ref={revealRef}
-      style={{ opacity, y, scale, filter }}
+      style={{ opacity, y, scale }}
     >
       {children}
     </motion.div>
@@ -153,6 +148,7 @@ function Reveal({
 
 function Hero({ onQuiz }: { onQuiz: () => void }) {
   const heroRef = useRef<HTMLElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ['start start', 'end start'],
@@ -161,6 +157,25 @@ function Hero({ onQuiz }: { onQuiz: () => void }) {
   const videoScale = useTransform(scrollYProgress, [0, 0.8], [1, 0.965])
   const contentY = useTransform(scrollYProgress, [0, 0.85], ['0%', '-18%'])
   const contentOpacity = useTransform(scrollYProgress, [0, 0.55, 0.88], [1, 1, 0])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          void video.play().catch(() => undefined)
+          return
+        }
+        video.pause()
+      },
+      { threshold: 0.05 },
+    )
+
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section className="hero" ref={heroRef}>
@@ -172,6 +187,7 @@ function Hero({ onQuiz }: { onQuiz: () => void }) {
           playsInline
           preload="metadata"
           poster={assetUrl('hero-poster.jpg')}
+          ref={videoRef}
           aria-label="Pessoas percebem uma luz verde em meio à cidade"
         >
           <source src={assetUrl('sctec-hero.optimized.mp4')} type="video/mp4" />
@@ -293,12 +309,10 @@ function StatHighlight() {
 
 function AnimatedStatValue({ value }: { value: string }) {
   const valueRef = useRef<HTMLElement>(null)
+  const displayRef = useRef<HTMLSpanElement>(null)
   const match = value.match(/^(\d+)(.*)$/)
   const target = Number(match?.[1] ?? 0)
   const suffix = match?.[2] ?? ''
-  const [displayValue, setDisplayValue] = useState(
-    match ? `0${suffix}` : value,
-  )
   const { scrollYProgress } = useScroll({
     target: valueRef,
     offset: ['start 90%', 'start 58%'],
@@ -306,16 +320,18 @@ function AnimatedStatValue({ value }: { value: string }) {
   const animatedValue = useTransform(scrollYProgress, [0, 1], [0, target])
 
   useMotionValueEvent(animatedValue, 'change', (latest) => {
-    if (!match) return
+    if (!match || !displayRef.current) return
     const nextValue = `${Math.round(latest)}${suffix}`
-    setDisplayValue((current) =>
-      current === nextValue ? current : nextValue,
-    )
+    if (displayRef.current.textContent !== nextValue) {
+      displayRef.current.textContent = nextValue
+    }
   })
 
   return (
     <strong aria-label={value} ref={valueRef}>
-      <span aria-hidden="true">{displayValue}</span>
+      <span aria-hidden="true" ref={displayRef}>
+        {match ? `0${suffix}` : value}
+      </span>
     </strong>
   )
 }
