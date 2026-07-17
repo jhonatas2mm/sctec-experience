@@ -504,14 +504,6 @@ a:focus-visible {
   letter-spacing: -0.045em;
 }
 
-.hero-choice-meta {
-  position: relative;
-  z-index: 1;
-  margin-top: 7px;
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 9px;
-}
-
 .hero-choice-icon {
   position: absolute;
   z-index: 2;
@@ -545,33 +537,11 @@ a:focus-visible {
 }
 
 .hero-opportunity {
-  justify-content: flex-end;
+  justify-content: center;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: rgba(5, 8, 6, 0.6);
   backdrop-filter: blur(18px);
-}
-
-.hero-opportunity-top {
-  position: absolute;
-  top: 17px;
-  left: 18px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--green);
-  font-size: 8px;
-  font-weight: 850;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 12px var(--green);
 }
 
 .hero-opportunity strong {
@@ -944,25 +914,6 @@ a:focus-visible {
   color: #555d58;
   font-size: 11px;
   font-weight: 800;
-}
-
-.track-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #b5bcb7;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.track-status span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--track-color);
-  box-shadow: 0 0 14px var(--track-color);
 }
 
 .track-eyebrow {

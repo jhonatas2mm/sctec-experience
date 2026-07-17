@@ -200,14 +200,6 @@ function Hero({ onQuiz }: { onQuiz: () => void }) {
         className="hero-content"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        <motion.p
-          className="eyebrow"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
-          Santa Catarina, prepare-se
-        </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 28, filter: 'blur(14px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -245,15 +237,11 @@ function Hero({ onQuiz }: { onQuiz: () => void }) {
           <Link className="hero-choice hero-choice-featured" to="/trilhas/carreira-tech">
             <span className="hero-choice-kicker">Em destaque</span>
             <strong>Carreira Tech 2026</strong>
-            <span className="hero-choice-meta">Conheça a jornada de formação</span>
             <span className="hero-choice-icon">
               <ArrowRight />
             </span>
           </Link>
           <Link className="hero-opportunity" to="/trilhas/ia-pratica">
-            <span className="hero-opportunity-top">
-              Oportunidade aberta
-            </span>
             <strong>IA na Prática</strong>
             <span>
               Matrículas abertas <ArrowRight />
@@ -339,7 +327,6 @@ function AnimatedStatValue({ value }: { value: string }) {
 function ProgramSection() {
   return (
     <section className="section program-section" id="programa">
-      <div className="section-index">01 / O PROGRAMA</div>
       <div className="program-layout">
         <Reveal className="program-title">
           <h2>
@@ -409,10 +396,6 @@ function TrackCard({ track, index }: { track: Track; index: number }) {
     >
       <div className="track-card-top">
         <span className="track-number">0{index + 1}</span>
-        <span className="track-status">
-          <span />
-          {track.status}
-        </span>
       </div>
       <p className="track-eyebrow">{track.eyebrow}</p>
       <h3>{track.name}</h3>
@@ -490,7 +473,6 @@ function HowItWorks() {
 
   return (
     <section className="section journey-section" id="como-funciona">
-      <div className="section-index">03 / COMO FUNCIONA</div>
       <Reveal>
         <h2>
           Seu próximo passo
