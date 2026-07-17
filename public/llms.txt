@@ -1,0 +1,15 @@
+# SCTEC
+
+Portal demonstrativo do Programa SCTEC, com informações sobre formações gratuitas em tecnologia e Inteligência Artificial para moradores de Santa Catarina.
+
+## Páginas
+
+- [Início](./)
+- [IA na Prática](./trilhas/ia-pratica)
+- [Carreira Tech](./trilhas/carreira-tech)
+- [IA para DEVs](./trilhas/ia-devs)
+- [Dúvidas](./duvidas)
+
+## Fonte oficial
+
+- [Portal oficial do SCTEC](https://sctec.scti.sc.gov.br/)
